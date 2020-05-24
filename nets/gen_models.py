@@ -15,7 +15,7 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as K
 from keras.models import Model
-from keras.layers import Add, Input, BatchNormalization, Activation, LeakyReLU, GlobalAveragePooling2D, Reshape
+from keras.layers import Add, Input, BatchNormalization, Activation, LeakyReLU, GlobalAveragePooling2D, Reshape, Multiply
 from keras.layers.convolutional import Conv2D, Convolution2D, MaxPooling2D, UpSampling2D
 
 #############################################################
@@ -263,7 +263,7 @@ class ASRDRM_gen(BaseSRModel):
         h = Activation('relu')(h)
         h = Conv2D(filters, kernel_size=1, strides=1, padding='same')(h)
         h = Activation('sigmoid')(h)
-        h = d * h
+        h = Multiply()([d, h])
 
         hout = Add()([h, layer_input])
         return hout
