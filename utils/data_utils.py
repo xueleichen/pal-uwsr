@@ -78,10 +78,13 @@ class dataLoaderUSR():
         lr_path = sorted(os.listdir(data_dir+"lr_8x/"))
         if (self.SCALE==2):
             hr_fold = "lr_4x/"
+            self.hr_res = (120,160)
         elif (self.SCALE==4):
             hr_fold = "lr_2x/"
+            self.hr_res = (240,320)
         else:
             hr_fold = "hr/"
+            self.hr_res = (480,640)
         hr_path = sorted(os.listdir(data_dir + hr_fold))
 
         num_paths = min(len(lr_path), len(hr_path))
@@ -98,7 +101,7 @@ class dataLoaderUSR():
             batch_hr = self.train_hr_paths[i*batch_size:(i+1)*batch_size]
             imgs_lr, imgs_hr = [], []
             for idx in range(len(batch_lr)): 
-                img_lr, img_hr =  read_and_resize_pair(batch_lr[idx], batch_hr[idx], low_res=self.lr_res_)
+                img_lr, img_hr =  read_and_resize_pair(batch_lr[idx], batch_hr[idx], low_res=(60,80), high_res=self.hr_res)
                 if (data_augment): img_lr, img_hr = augment(img_lr, img_hr)
                 imgs_lr.append(img_lr)
                 imgs_hr.append(img_hr)
@@ -112,7 +115,7 @@ class dataLoaderUSR():
         paths_hr = [self.val_hr_paths[i] for i in idx]
         imgs_lr, imgs_hr = [], []
         for idx in range(len(paths_hr)):
-            img_lr, img_hr = read_and_resize_pair(paths_lr[idx], paths_hr[idx], low_res=self.lr_res_)
+            img_lr, img_hr = read_and_resize_pair(paths_lr[idx], paths_hr[idx], low_res=(60,80), high_res=self.hr_res)
             imgs_lr.append(img_lr)
             imgs_hr.append(img_hr)
         imgs_lr = preprocess(np.array(imgs_lr))
