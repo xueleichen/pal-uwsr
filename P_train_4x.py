@@ -99,8 +99,8 @@ while (step <= num_step):
 
     epoch += 1
 
-with open(checkpoint_dir+"_.json", "w") as json_file:
+with open(checkpoint_dir+".json", "w") as json_file:
     json_file.write(model.to_json())
-model.save_weights(checkpoint_dir+"_.h5")
+model.save_weights(checkpoint_dir+".h5")
 print("\nSaved trained {0} model in {1}\n".format(phase,checkpoint_dir))
 
