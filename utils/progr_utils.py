@@ -2,7 +2,6 @@
    tools for progressive growing of sr model
 """
 import tensorflow as tf
-from __future__ import print_function, division
 from keras.layers import Add, UpSampling2D, Conv2D, BatchNormalization, Activation, GlobalAveragePooling2D, Reshape, Multiply, Layer
 from keras.models import Model
 from keras import backend
