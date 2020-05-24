@@ -59,7 +59,7 @@ generator = model_from_json(loaded_model_json)
 generator.load_weights(model_h5)
 
 # update the model with fadein
-model = update_model(generator)
+model = update_model(generator, name='p3')
 print (model.summary())
 
 # checkpoint directory
