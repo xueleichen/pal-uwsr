@@ -76,7 +76,7 @@ optimizer_ = Adam(0.0002, 0.5)
 
 model.compile(optimizer=optimizer_, loss=total_gen_loss)
 
-print ("\nTraining: {0} with".format(phase))
+print ("\nTraining: {0}".format(phase))
 ## training pipeline
 step, epoch = 0, 0; start_time = datetime.datetime.now()
 while (step <= num_step):
