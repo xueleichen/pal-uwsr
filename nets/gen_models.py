@@ -259,7 +259,7 @@ class ASRDRM_gen(BaseSRModel):
         
         h = GlobalAveragePooling2D()(d)
         h = Reshape((1,1,filters))(h)
-        h = Conv2D(filters/8, kernel_size=1, strides=1, padding='same')(h)
+        h = Conv2D(filters//8, kernel_size=1, strides=1, padding='same')(h)
         h = Activation('relu')(h)
         h = Conv2D(filters, kernel_size=1, strides=1, padding='same')(h)
         h = Activation('sigmoid')(h)
