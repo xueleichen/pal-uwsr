@@ -47,7 +47,7 @@ phase = "p2"
 ###################################################################################
 # load old model
 checkpoint_dir = "/content/drive/My Drive/USR/checkpoints/p1"
-model_h5 = ocheckpoint_dir+".h5" 
+model_h5 = checkpoint_dir+".h5" 
 model_json = checkpoint_dir+".json"
 # sanity
 assert (os.path.exists(model_h5) and os.path.exists(model_json))
