@@ -7,7 +7,6 @@
 # Interactive Robotics and Vision Lab (http://irvlab.cs.umn.edu/)
 # Any part of this repo can be used for academic and educational purposes only
 """
-from __future__ import print_function, division
 import os
 import sys
 import datetime
@@ -35,7 +34,7 @@ hr_shape = (hr_height, hr_width, channels)
 data_loader = dataLoaderUSR(DATA_PATH="/content/drive/My Drive/USR-248/", SCALE=4)
 
 # training parameters
-num_epochs = 10
+num_epochs = int(sys.argv[1])
 batch_size = 2
 sample_interval = 500 # per step
 steps_per_epoch = (data_loader.num_train//batch_size)
