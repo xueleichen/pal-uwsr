@@ -7,7 +7,6 @@
 # Interactive Robotics and Vision Lab (http://irvlab.cs.umn.edu/)
 # Any part of this repo can be used for academic and educational purposes only
 """
-from __future__ import print_function, division
 import os
 import sys
 import datetime
@@ -21,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2' # less logs
 from utils.plot_utils import save_val_samples
 from utils.data_utils import dataLoaderUSR, deprocess
 from utils.loss_utils import perceptual_distance, total_gen_loss
-from utils.progr_utils import update_model, update_fadein
+from utils.progr_utils import update_model, update_fadein, WeightedSum
 # network
 from nets.gen_models import ASRDRM_gen
 #############################################################################
@@ -54,7 +53,7 @@ assert (os.path.exists(model_h5) and os.path.exists(model_json))
 # load json and create model
 with open(model_json, "r") as json_file:
     loaded_model_json = json_file.read()
-generator = model_from_json(loaded_model_json)
+generator = model_from_json(loaded_model_json, , custom_objects={'WeightedSum': WeightedSum}))
 # load weights into the model
 generator.load_weights(model_h5)
 
