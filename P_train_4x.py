@@ -66,7 +66,7 @@ print (model.summary())
 checkpoint_dir = os.path.join("/content/drive/My Drive/USR/checkpoints/", phase)
 if not os.path.exists(checkpoint_dir): os.makedirs(checkpoint_dir)
 ## sample directory
-samples_dir = os.path.join("/content/drive/My Drive/USR/output/", phase)
+samples_dir = os.path.join("/content/drive/My Drive/USR/images/", phase)
 if not os.path.exists(samples_dir): os.makedirs(samples_dir)
 
 #####################################################################
