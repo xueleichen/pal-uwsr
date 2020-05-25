@@ -6,6 +6,7 @@ from scipy import misc
 from keras.models import model_from_json
 ## local libs
 from utils.data_utils import getPaths, preprocess, deprocess
+from utils.progr_utils import WeightedSum
 
 ## for testing arbitrary local data
 data_dir = "/content/drive/My Drive/USR-248/TEST/lr_8x"
@@ -23,7 +24,7 @@ assert (os.path.exists(model_h5) and os.path.exists(model_json))
 # load json and create model
 with open(model_json, "r") as json_file:
     loaded_model_json = json_file.read()
-generator = model_from_json(loaded_model_json)
+generator = model_from_json(loaded_model_json, custom_objects={'WeightedSum': WeightedSum})
 # load weights into new model
 generator.load_weights(model_h5)
 print("\nLoaded data and model")
