@@ -18,7 +18,7 @@ def getSSIM(X, Y):
     assert (X.shape == Y.shape), "Image-patche provided have different dimensions"
     nch = 1 if X.ndim==2 else X.shape[-1]
     mssim = []
-    for ch in xrange(nch):
+    for ch in range(nch):
         Xc, Yc = X[...,ch].astype(np.float64), Y[...,ch].astype(np.float64)
         mssim.append(compute_ssim(Xc, Yc))
     return np.mean(mssim)
