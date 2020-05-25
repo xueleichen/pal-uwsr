@@ -20,8 +20,8 @@ from utils.uqim_utils import getUIQM
 from utils.ssm_psnr_utils import getSSIM, getPSNR
 
 ## data paths
-GTr_im_dir  = 'data/test/hr/' # ground truth im-dir with {f.ext}
-GEN_im_dir  = "data/output/4x/srdrm-gan/" # generated im-dir with {f_gen.png}
+GTr_im_dir  = '/content/drive/My Drive/USR-248/TEST/hr/' # ground truth im-dir with {f.ext}
+GEN_im_dir  = "/content/drive/My Drive/USR/output/p3/" # generated im-dir with {f_gen.png}
 GEN_paths = getPaths(GEN_im_dir)
 
 ## mesures uqim for all images in a directory
