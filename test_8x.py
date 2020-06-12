@@ -14,8 +14,6 @@ test_paths = getPaths(data_dir)
 print ("{0} test images are loaded".format(len(test_paths)))
 
 ## load specific model
-model_name = "srdrm"
-ckpt_name =  "model_30_"
 checkpoint_dir  = "/content/drive/My Drive/USR/checkpoints/p3" 
 model_h5 = checkpoint_dir + ".h5" 
 model_json = checkpoint_dir + ".json"
