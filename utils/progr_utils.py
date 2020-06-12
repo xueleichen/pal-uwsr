@@ -70,7 +70,7 @@ class WeightedSum(Layer):
 		output = ((1.0 - self.alpha) * inputs[0]) + (self.alpha * inputs[1])
 		return output
 
-def update_model(old_model):
+def update_model_p2(old_model):
 	for layer in old_model.layers:
 		layer.name = layer.name + str("_o")
 		layer.trainable = False
@@ -80,6 +80,26 @@ def update_model(old_model):
 
 	# new block
 	h = res_mult_2x(old_model.layers[-2].output)
+	n_rgb = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(h)
+
+	# # weighted sum of old and new output
+	out = WeightedSum()([o_rgb, n_rgb])
+
+	# define model
+	new_model = Model(old_model.input, out)
+
+	return new_model
+
+def update_model_p3(old_model):
+	for layer in old_model.layers:
+		layer.name = layer.name + str("_o")
+		layer.trainable = False
+	# 2x old output
+	o_ups = UpSampling2D()(old_model.layers[-4].output)
+	o_rgb = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(o_ups)
+
+	# new block
+	h = res_mult_2x(old_model.layers[-4].output)
 	n_rgb = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(h)
 
 	# # weighted sum of old and new output
