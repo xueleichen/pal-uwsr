@@ -73,6 +73,7 @@ class WeightedSum(Layer):
 def update_model(old_model):
 	for layer in old_model.layers:
 		layer.name = layer.name + str("_o")
+		layer.trainable = False
 	# 2x old output
 	o_ups = UpSampling2D()(old_model.layers[-2].output)
 	o_rgb = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(o_ups)
