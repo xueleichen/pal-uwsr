@@ -20,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2' # less logs
 from utils.plot_utils import save_val_samples
 from utils.data_utils import dataLoaderUSR, deprocess
 from utils.loss_utils import perceptual_distance, total_gen_loss
-from utils.progr_utils import update_model, update_fadein
+from utils.progr_utils import update_model_p2, update_fadein
 # network
 from nets.gen_models import ASRDRM_gen
 #############################################################################
@@ -58,12 +58,11 @@ generator = model_from_json(loaded_model_json)
 generator.load_weights(model_h5)
 
 # update the model with fadein
-model = update_model(generator)
+model = update_model_p2(generator)
 print (model.summary())
 
 # checkpoint directory
-checkpoint_dir = os.path.join("/content/drive/My Drive/USR/checkpoints/", phase)
-if not os.path.exists(checkpoint_dir): os.makedirs(checkpoint_dir)
+checkpoint_dir = "/content/drive/My Drive/USR/checkpoints/" + phase
 ## sample directory
 samples_dir = os.path.join("/content/drive/My Drive/USR/images/", phase)
 if not os.path.exists(samples_dir): os.makedirs(samples_dir)
