@@ -13,7 +13,6 @@ def residual_block(layer_input, filters):
 	"""Residual atentional block"""
 	
 	d = Conv2D(filters, kernel_size=3, strides=1, padding='same')(layer_input)
-	d = BatchNormalization(momentum=0.5)(d)
 	d = Activation('relu')(d)
 	d = Conv2D(filters, kernel_size=3, strides=1, padding='same')(d)
 	
@@ -44,7 +43,6 @@ def res_mult_2x(layer_input):
 		r = residual_block(r, gf)
 	# Post-residual block
 	l2 = Conv2D(64, kernel_size=4, strides=1, padding='same')(r)
-	l2 = BatchNormalization(momentum=0.8)(l2)
 	l2 = Add()([l2, l1])
 	# Upsampling
 	layer_2x = deconv2d(l2)
