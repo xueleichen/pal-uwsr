@@ -18,7 +18,7 @@ def residual_block(layer_input, filters):
 	
 	h = GlobalAveragePooling2D()(d)
 	h = Reshape((1,1,filters))(h)
-	h = Conv2D(filters//8, kernel_size=1, strides=1, padding='same')(h)
+	h = Conv2D(filters//16, kernel_size=1, strides=1, padding='same')(h)
 	h = Activation('relu')(h)
 	h = Conv2D(filters, kernel_size=1, strides=1, padding='same')(h)
 	h = Activation('sigmoid')(h)
