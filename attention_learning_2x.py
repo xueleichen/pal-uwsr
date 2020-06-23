@@ -25,7 +25,7 @@ from nets.gen_models import ASRDRM_gen
 #############################################################################
 ## dataset and image information
 channels = 3
-lr_width, lr_height = 80, 60   # low res
+lr_width, lr_height = 320, 240   # low res
 hr_width, hr_height = 640, 480 # high res
 # input and output data
 lr_shape = (lr_height, lr_width, channels)
@@ -44,7 +44,7 @@ model_name="attention_learning_2x"
 
 ###################################################################################
 # initialize the model
-model_loader = ASRDRM_gen(lr_shape, hr_shape, SCALE=8)
+model_loader = ASRDRM_gen(lr_shape, hr_shape, SCALE=2)
 model = model_loader.create_model()
 print (model.summary())
 # checkpoint directory
