@@ -36,6 +36,7 @@ data_loader = dataLoaderUSR(DATA_PATH="/content/drive/My Drive/USR-248/", SCALE=
 num_epochs = int(sys.argv[1])
 batch_size = 2
 sample_interval = 500 # per step
+ckpt_interval = 5
 steps_per_epoch = (data_loader.num_train//batch_size)
 num_step = num_epochs*steps_per_epoch
 
@@ -81,8 +82,10 @@ while (step <= num_step):
 
     epoch += 1
 
-with open(checkpoint_dir+".json", "w") as json_file:
-    json_file.write(model.to_json())
-model.save_weights(checkpoint_dir+".h5")
-print("\nSaved trained {0} model in {1}\n".format(model_name,checkpoint_dir))
+    if (epoch%ckpt_interval==0):
+        ckpt_name = os.path.join(checkpoint_dir, ("model_%d" %epoch))
+        with open(ckpt_name+"_.json", "w") as json_file:
+            json_file.write(model.to_json())
+        model.save_weights(ckpt_name+"_.h5")
+        print("\nSaved trained model in {0}\n".format(checkpoint_dir))
 
