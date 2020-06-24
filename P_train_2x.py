@@ -21,7 +21,7 @@ from utils.plot_utils import save_val_samples
 from utils.data_utils import dataLoaderUSR, deprocess
 from utils.loss_utils import perceptual_distance, total_gen_loss
 # network
-from nets.gen_models import ASRDRM_gen
+from nets.gen_models import PAL
 #############################################################################
 ## dataset and image information
 channels = 3
@@ -44,7 +44,7 @@ phase = "p1"
 
 ###################################################################################
 # initialize the model
-model_loader = ASRDRM_gen(lr_shape, hr_shape, SCALE=2)
+model_loader = PAL(lr_shape, hr_shape, SCALE=2)
 model = model_loader.create_model()
 print (model.summary())
 # checkpoint directory

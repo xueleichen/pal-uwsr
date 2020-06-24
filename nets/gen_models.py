@@ -241,7 +241,7 @@ class SRDRM_gen(BaseSRModel):
 
 #############################################################
 
-class ASRDRM_gen(BaseSRModel):
+class PAL(BaseSRModel):
     """ Proposed SR model using Residual Multipliers
     """
     def __init__(self, lr_shape, hr_shape, SCALE=4):

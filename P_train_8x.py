@@ -22,7 +22,7 @@ from utils.data_utils import dataLoaderUSR, deprocess
 from utils.loss_utils import perceptual_distance, total_gen_loss
 from utils.progr_utils import update_model_p3, update_fadein, WeightedSum
 # network
-from nets.gen_models import ASRDRM_gen
+from nets.gen_models import PAL
 #############################################################################
 ## dataset and image information
 channels = 3
