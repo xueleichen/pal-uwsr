@@ -245,7 +245,7 @@ class PAL(BaseSRModel):
     """ Proposed SR model using Residual Multipliers
     """
     def __init__(self, lr_shape, hr_shape, SCALE=4):
-        super(ASRDRM_gen, self).__init__("ASRDRM", lr_shape, hr_shape, SCALE)
+        super(PAL, self).__init__("PAL", lr_shape, hr_shape, SCALE)
         self.n_residual_blocks = 8
         self.gf = 64
 
@@ -302,7 +302,7 @@ class PAL(BaseSRModel):
 class PALwoA(BaseSRModel):
 
     def __init__(self, lr_shape, hr_shape, SCALE=4):
-        super(ASRDRM_gen, self).__init__("ASRDRM", lr_shape, hr_shape, SCALE)
+        super(PALwoA, self).__init__("PALwoA", lr_shape, hr_shape, SCALE)
         self.n_residual_blocks = 8
         self.gf = 64
 
