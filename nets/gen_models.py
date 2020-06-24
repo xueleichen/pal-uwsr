@@ -298,3 +298,52 @@ class PAL(BaseSRModel):
         # Generate high resolution output
         out = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(o3)
         return Model(init, out)
+
+class PALwoA(BaseSRModel):
+
+    def __init__(self, lr_shape, hr_shape, SCALE=4):
+        super(ASRDRM_gen, self).__init__("ASRDRM", lr_shape, hr_shape, SCALE)
+        self.n_residual_blocks = 8
+        self.gf = 64
+
+    def residual_block(self, layer_input, filters):
+        """Residual atentional block"""
+
+        d = Conv2D(filters, kernel_size=3, strides=1, padding='same')(layer_input)
+        d = Activation('relu')(d)
+        d = Conv2D(filters, kernel_size=3, strides=1, padding='same')(d)
+
+        hout = Add()([d, layer_input])
+        return hout
+
+    def deconv2d(self, layer_input):
+        """Layers used during upsampling"""
+        u = UpSampling2D(size=2)(layer_input)
+        u = Conv2D(256, kernel_size=3, strides=1, padding='same')(u)
+        u = Activation('relu')(u)
+        return u
+
+    def res_mult_2x(self, layer_input):
+        l1 = Conv2D(64, kernel_size=4, strides=1, padding='same')(layer_input)
+        l1 = Activation('relu')(l1)
+        # Propogate through residual blocks
+        r = self.residual_block(l1, self.gf)
+        for _ in range(self.n_residual_blocks - 1):
+            r = self.residual_block(r, self.gf)
+        # Post-residual block
+        l2 = Conv2D(64, kernel_size=4, strides=1, padding='same')(r)
+        l2 = Add()([l2, l1])
+        # Upsampling
+        layer_2x = self.deconv2d(l2)
+        return layer_2x
+
+    def create_model(self):
+        # Low resolution image input
+        init = Input(shape=self.lr_shape)
+        # Pre-residual block
+        o1 = self.res_mult_2x(init)
+        o2 = o1 if self.SCALE<4 else self.res_mult_2x(o1)
+        o3 = o2 if self.SCALE<8 else self.res_mult_2x(o2) 
+        # Generate high resolution output
+        out = Conv2D(3, kernel_size=5, strides=1, padding='same', activation='tanh')(o3)
+        return Model(init, out)
