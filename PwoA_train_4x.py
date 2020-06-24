@@ -20,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2' # less logs
 from utils.plot_utils import save_val_samples
 from utils.data_utils import dataLoaderUSR, deprocess
 from utils.loss_utils import perceptual_distance, total_gen_loss
-from utils.progr_utils import update_model_p2, update_fadein
+from utils.progr_woA_utils import update_model_p2, update_fadein
 # network
 from nets.gen_models import PALwoA
 #############################################################################
@@ -45,7 +45,7 @@ phase = "p2"
 
 ###################################################################################
 # load old model
-checkpoint_dir = "/content/drive/My Drive/USR/checkpoints/p1"
+checkpoint_dir = "/content/drive/My Drive/USR/ablation/checkpoints/p1"
 model_h5 = checkpoint_dir+".h5" 
 model_json = checkpoint_dir+".json"
 # sanity
@@ -62,9 +62,9 @@ model = update_model_p2(generator)
 print (model.summary())
 
 # checkpoint directory
-checkpoint_dir = "/content/drive/My Drive/USR/checkpoints/" + phase
+checkpoint_dir = "/content/drive/My Drive/USR/ablation/checkpoints/" + phase
 ## sample directory
-samples_dir = os.path.join("/content/drive/My Drive/USR/images/", phase)
+samples_dir = os.path.join("/content/drive/My Drive/USR/ablation/images/", phase)
 if not os.path.exists(samples_dir): os.makedirs(samples_dir)
 
 #####################################################################

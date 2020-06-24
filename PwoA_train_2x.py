@@ -48,10 +48,10 @@ model_loader = PALwoA(lr_shape, hr_shape, SCALE=2)
 model = model_loader.create_model()
 print (model.summary())
 # checkpoint directory
-checkpoint_dir = os.path.join("/content/drive/My Drive/USR/checkpoints/", phase)
+checkpoint_dir = os.path.join("/content/drive/My Drive/USR/ablation/checkpoints/", phase)
 if not os.path.exists(checkpoint_dir): os.makedirs(checkpoint_dir)
 ## sample directory
-samples_dir = os.path.join("/content/drive/My Drive/USR/images/", phase)
+samples_dir = os.path.join("/content/drive/My Drive/USR/ablation/images/", phase)
 if not os.path.exists(samples_dir): os.makedirs(samples_dir)
 
 #####################################################################
